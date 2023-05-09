@@ -47,3 +47,69 @@ for (int i = 1; i < myArray.GetLength(0); i ++)
 }
 
 Console.WriteLine("$Строка с наименьшей суммой элементов: {minSum}");
+
+// Задача 58
+int[,] CreateRandom2dArray(int rows, int columns, int minValue, int maxValue)
+{
+int[,]array = new int [rows, columns];
+    for(int i = 0; i < rows; i ++)
+    {
+        for(int j = 0; j < columns; j ++)
+        {
+            array[i,j] = new Random().Next(minValue, maxValue + 1);
+        }
+    }
+    return array;
+}
+
+void Show2dArray(int[,] array)
+{
+    for(int i = 0; i < array.GetLength(0); i ++)
+    {
+        for(int j = 0; j < array.GetLength(1); j ++)
+       { 
+        Console.Write(array[i,j] + " ");
+       }
+    Console.WriteLine();
+    }
+}      
+Console.WriteLine();    
+
+Console.Write("Введите количество строк первой матрицы");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов первой матрицы");
+int columns = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите минимальный элемент первой матрицы");
+int minValue = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите максимальный элемент первой матрицы");
+int maxValue = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество строк второй матрицы");
+int rows2 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество столбцов второй матрицы");
+int columns2 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите минимальный элемент второй матрицы");
+int minValue2 = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите максимальный элемент второй матрицы");
+int maxValue2 = Convert.ToInt32(Console.ReadLine());
+int[,] myArray1 = CreateRandom2dArray(rows,columns, minValue, maxValue);
+Show2dArray(myArray1);
+int[,] myArray2 = CreateRandom2dArray(rows2,columns2, minValue2, maxValue2);
+Show2dArray(myArray2);
+int[,] resultArray = CreateRandom2dArray(rows, columns2, minValue, maxValue);
+Show2dArray(resultArray);
+void MultipleArray(int[,] myArray1, int[,] myArray2, int[,] resultArray)
+{
+     for(int i = 0; i < resultArray.GetLength(0); i ++)
+    {
+        for(int j = 0; j < resultArray.GetLength(1); j ++)
+       { 
+        int sum = 0;
+        for (int m = 0; m < myArray1.GetLength(1); m ++)
+        {
+            sum += myArray1[i,m] * myArray2[m,j];
+        }
+        resultArray[i,j] = sum;
+       }
+    }
+}
+MultipleArray(myArray1, myArray2, resultArray);
